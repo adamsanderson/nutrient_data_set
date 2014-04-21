@@ -5,28 +5,42 @@ class ParserTest < MiniTest::Unit::TestCase
   attr_reader :parser
   
   def setup
-    @parser = NutrientDb::Parser.new("test/fixtures/FOOD_DES.txt")
+    @parser = NutrientDb::Parser.new("test/fixtures/NUT_DATA.txt")
   end
   
   def test_reads_strings_from_data_file
     record = parser.first
-    description = record[:description]
+    id = record[:food_id]
     
-    assert_equal "Butter, salted", description
+    assert_equal "01001", id
   end
   
   def test_reads_integers_from_data_file
-    record = parser.first
-    refuse = record[:percent_refuse]
+    record  = parser.first
+    samples = record[:samples]
     
-    assert_equal 0, refuse
+    assert_equal 16, samples
   end
   
   def test_reads_floats_from_data_file
     record = parser.first
-    factor = record[:calorie_factor]
+    value  = record[:value]
     
-    assert_equal 3.87, factor
+    assert_equal 0.85, value
+  end
+  
+  def test_reads_dates_from_data_file
+    record = parser.first
+    updated_at = record[:updated_at]
+    
+    assert_equal Date.new(1976, 11), updated_at
+  end
+  
+  def test_reads_bools_from_data_file
+    record = parser.first
+    fort = record[:is_fortification]
+    
+    assert fort
   end
   
   def test_reads_multiple_records

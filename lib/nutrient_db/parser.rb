@@ -3,8 +3,15 @@ require 'csv'
 class NutrientDb::Parser
   EXTERNAL_ENCODING = Encoding::ISO8859_1
   CONVERSIONS = {
-    :num => lambda{|v| v.to_f if v},
-    :int => lambda{|v| v.to_i if v},
+    :num  => lambda{|v| v.to_f if v},
+    :int  => lambda{|v| v.to_i if v},
+    :bool => lambda{|v| v == "Y"   },
+    :date => lambda do |v|
+      if v
+        m,y = v.split("/")
+        Date.new(y.to_i, m.to_i)
+      end
+    end,
   }
   
   include Enumerable
