@@ -33,7 +33,7 @@ class NutrientDb::Metadata
     
     "nut_data.txt" => {
       food_id:           :text, # NDB_No 
-      id:                :text, # Nutr_No 
+      nutrient_id:       :text, # Nutr_No 
       value:             :num,  # Nutr_Val 
       samples:           :int,  # Num_Data_Pts
       std_error:         :num,  # Std_Error
@@ -50,7 +50,25 @@ class NutrientDb::Metadata
       stat_comments:     :text, # Stat_cmt
       updated_at:        :date, # AddMod_Date
       confidence_id:     :text, # CC
-    }
+    },
     
+    "nutr_def.txt" => {
+      id:                :text, # Nutr_No
+      units:             :text, # Units
+      tag_name:          :text, # Tagname
+      name:              :text, # NutrDesc
+      decimals:          :int,  # Num_Dec
+      sort_order:        :int,  # SR_Order
+    },
+    
+    "langual.txt" => {
+      food_id:           :text, # NDB_No
+      factor_id:         :text, # Factor_Code
+    },
+    
+    "langdesc.txt" => {
+      id:                :text, # Factor_Code
+      name:              :text, # Description
+    }
   }
 end
