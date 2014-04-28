@@ -1,11 +1,11 @@
 require 'minitest/autorun'
 require_relative '../lib/nutrient_db'
 
-class ParserTest < MiniTest::Unit::TestCase
+class ParserTest < Minitest::Test
   attr_reader :parser
   
   def setup
-    @parser = NutrientDb::Parser.new("test/fixtures/NUT_DATA.txt")
+    @parser = NutrientDb::Parser.new("test/fixtures/NUT_DATA.txt", NutrientDb::META_DATA["nut_data.txt"])
   end
   
   def test_reads_strings_from_data_file

@@ -17,9 +17,11 @@ class NutrientDb::Parser
   include Enumerable
   
   attr_reader :path
+  attr_reader :metadata
 
-  def initialize(path)
+  def initialize(path, metadata)
     @path = path
+    @metadata = metadata
   end
   
   def each
@@ -43,15 +45,11 @@ class NutrientDb::Parser
   end
   
   def headers
-    NutrientDb.metadata[path].keys
+    metadata.keys
   end
   
   def types
     metadata.values
   end
-  
-  def metadata
-    @metadata ||= NutrientDb.metadata[path]
-  end
-  
+    
 end
