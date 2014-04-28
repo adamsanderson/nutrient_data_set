@@ -1,8 +1,8 @@
 class NutrientDb
-  DATA_DIR = File.dirname(__FILE__) + "../data/sr26/"
+  DATA_DIR = File.dirname(__FILE__) + "/../data/sr26/"
   
   META_DATA = {
-    "food_des.txt" => {
+    "food_des" => {
       id:                :text, # NDB_No
       food_group_id:     :text, # FdGrp_Cd
       description:       :text, # Long_Desc
@@ -19,7 +19,7 @@ class NutrientDb
       calorie_factor:    :num,  # CHO_Factor
     },
     
-    "nut_data.txt" => {
+    "nut_data" => {
       food_id:           :text, # NDB_No 
       nutrient_id:       :text, # Nutr_No 
       value:             :num,  # Nutr_Val 
@@ -40,7 +40,7 @@ class NutrientDb
       confidence_id:     :text, # CC
     },
     
-    "nutr_def.txt" => {
+    "nutr_def" => {
       id:                :text, # Nutr_No
       units:             :text, # Units
       tag_name:          :text, # Tagname
@@ -49,16 +49,32 @@ class NutrientDb
       sort_order:        :int,  # SR_Order
     },
     
-    "langual.txt" => {
+    "langual" => {
       food_id:           :text, # NDB_No
       factor_id:         :text, # Factor_Code
     },
     
-    "langdesc.txt" => {
+    "langdesc" => {
       id:                :text, # Factor_Code
       name:              :text, # Description
     }
   }
+  
+  attr_reader :data_dir
+  
+  def initialize(data_dir=DATA_DIR)
+    @data_dir = data_dir
+    @cache    = {}
+  end
+  
+  def [] name
+    name = normalize_file_name(name)
+    path = data_path(name)
+    
+    columns = META_DATA.fetch(name)
+    
+    Parser.new(path, columns)
+  end
   
   private
   
@@ -66,7 +82,20 @@ class NutrientDb
     File.basename(file_name.downcase)
   end
   
+  def data_path(file_name)
+    File.join(data_dir, file_name + ".txt")
+  end
+  
+  def method_missing name, *arguments
+    name = name.to_s
+    
+    if META_DATA.key? name
+      self[name]
+    else
+      super
+    end
+  end
+  
 end
 
 require_relative './nutrient_db/parser'
-require_relative './nutrient_db/metadata'

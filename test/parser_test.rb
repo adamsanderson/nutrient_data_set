@@ -5,7 +5,7 @@ class ParserTest < Minitest::Test
   attr_reader :parser
   
   def setup
-    @parser = NutrientDb::Parser.new("test/fixtures/NUT_DATA.txt", NutrientDb::META_DATA["nut_data.txt"])
+    @parser = NutrientDb::Parser.new("test/fixtures/NUT_DATA.txt", NutrientDb::META_DATA["nut_data"])
   end
   
   def test_reads_strings_from_data_file
