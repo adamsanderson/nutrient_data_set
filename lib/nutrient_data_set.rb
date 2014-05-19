@@ -1,4 +1,4 @@
-class NutrientDb
+class NutrientDataSet
   DATA_DIR = File.dirname(__FILE__) + "/../data/sr26/"
   
   META_DATA = {
@@ -149,4 +149,4 @@ class NutrientDb
   
 end
 
-require_relative './nutrient_db/parser'
+require_relative './nutrient_data_set/parser'

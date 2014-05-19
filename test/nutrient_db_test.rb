@@ -1,11 +1,11 @@
 require 'minitest/autorun'
-require_relative '../lib/nutrient_db'
+require_relative '../lib/nutrient_data_set'
 
-class NutrientDbTest < Minitest::Test
+class NutrientDataSetTest < Minitest::Test
   attr_reader :data
   
   def setup
-    @data = NutrientDb.new
+    @data = NutrientDataSet.new
   end
   
   def test_loads_data_for_known_file
@@ -27,18 +27,18 @@ class NutrientDbTest < Minitest::Test
   end
   
   def test_each_file_is_represented
-    data_dir = NutrientDb::DATA_DIR
+    data_dir = NutrientDataSet::DATA_DIR
     
     data_files = Dir[data_dir+"/*.txt"]
-    supported_files = NutrientDb::META_DATA.keys
+    supported_files = NutrientDataSet::META_DATA.keys
     
-    assert_equal data_files.length, supported_files.length, "Expected each data file to be represented in NutrientDb"
+    assert_equal data_files.length, supported_files.length, "Expected each data file to be represented in NutrientDataSet"
   end
   
   # This is a sledgehammer type of test, but at least it gives you some warning
   # if something is REALLY screwed up.
   def test_each_file_returns_data
-    files = NutrientDb::META_DATA.keys
+    files = NutrientDataSet::META_DATA.keys
     files.each do |name|
       parser = data["nutr_def"]
       row    = parser.take(1)

@@ -1,6 +1,6 @@
 require 'csv'
 
-class NutrientDb::Parser
+class NutrientDataSet::Parser
   EXTERNAL_ENCODING = Encoding::ISO8859_1
   CONVERSIONS = {
     :num  => lambda{|v| v.to_f if v},

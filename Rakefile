@@ -8,12 +8,12 @@ end
 
 desc "Build a new version" 
 task :build do
-  `gem build nutrient_db.gemspec`
+  `gem build nutrient_data_set.gemspec`
 end
 
 desc "Removes build artifacts" 
 task :clean do
-  rm Dir["nutrient_db*.gem"]
+  rm Dir["nutrient_data_set*.gem"]
 end
 
 task :default => :test

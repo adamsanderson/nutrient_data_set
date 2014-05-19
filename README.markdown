@@ -1,4 +1,4 @@
-NutrientDb
+NutrientDataSet
 ==========
 
 This is a very basic library for accessing the [USDA National Nutrient Database](http://ndb.nal.usda.gov/) (Standard Reference 26).  
@@ -8,11 +8,11 @@ Included is a vast amount of data concerning the nutrient content of various foo
 Example Usage
 -------------
 
-List all the foods included in the nutrient database:
+List all the foods included in the nutrient data set:
 
-    require 'nutrient_db'
+    require 'nutrient_data_set'
 
-    db = NutrientDb.new 
+    db = NutrientDataSet.new 
     db[:food_des].map do |food|
       id   = food[:id]
       desc = food[:description]
@@ -22,7 +22,7 @@ List all the foods included in the nutrient database:
     
 Find how much Calcium is in Feta Cheese:
 
-    db = NutrientDb.new
+    db = NutrientDataSet.new
     food = db[:food_des].find{|row| row[:name] =~ /feta/i }
     #=> #<CSV::Row id:"01019" food_group_id:"0100" description:"Cheese, feta" ... >
     
@@ -40,7 +40,7 @@ This is not a database, in fact it's not that friendly to use, but should you wa
 Data and Documentation
 ----------------------
 
-I've tried to give everything idiomatic and sensible names for use in Ruby.  To find out more about all the data, look in the `data` directory.  The full documentation for the dataset is contained in the PDF.  See `lib/nutrient_db` for all the mappings.
+I've tried to give everything idiomatic and sensible names for use in Ruby.  To find out more about all the data, look in the `data` directory.  The full documentation for the dataset is contained in the PDF.  See `lib/nutrient_data_set` for all the mappings.
 
 
 ---
