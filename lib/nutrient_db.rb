@@ -31,7 +31,7 @@ class NutrientDb
       is_fortification:  :bool, # Add_Nutr_Mark
       num_studies:       :int,  # Num_Studies
       min_value:         :num,  # Min
-      max_value:         :max,  # Max
+      max_value:         :num,  # Max
       degrees_of_freedom: :int, # DF
       lower_error_bound: :num,  # Low_EB
       upper_error_bound: :num,  # Up_EB
@@ -57,7 +57,58 @@ class NutrientDb
     "langdesc" => {
       id:                :text, # Factor_Code
       name:              :text, # Description
-    }
+    },
+    
+    "fd_group" => {
+      id:                :text, # FdGrp_Cd
+      name:              :text, # FdGrp_Desc
+    },
+    
+    "src_cd" => {
+      id:                :text, # Src_Cd
+      name:              :text, # SrcCd_Desc
+    },
+    
+    "deriv_cd" => {
+      id:                :text, # Deriv_Cd
+      name:              :text, # Deriv_Desc
+    },
+    
+    "datasrcln" => {
+      food_id:           :text, # NDB_No
+      nutrient_id:       :text, # Nutr_No
+      data_source_id:    :text, # DataSrc_ID
+    },
+    
+    "data_src" => {
+      id:                :text, # DataSrc_ID 
+      authors:           :text, # Authors
+      title:             :text, # Title
+      year:              :int,  # Year 
+      journal:           :text, # Journal
+      volume_or_city:    :text, # Vol_City
+      state:             :text, # Issue_State
+      start_page:        :text, # Start_Page 
+      end_page:          :text, # End_Page
+    },
+    
+    "footnote" => {
+      food_id:           :text, # NDB_No
+      id:                :text, # Footnt_No
+      type:              :text, # Footnt_Typ (D: Description, M: Measure, N: nutrient)
+      nutrient_id:       :text, # Nutr_No
+      footnote:          :text, # Footnt_Txt
+    },
+    
+    "weight" => {
+      food_id:           :text, # NDB_No 
+      sort_order:        :int,  # Seq 
+      amount:            :text, # Amount - Unit modifier (for example, 1 in “1 cup”).
+      type:              :text, # Msre_Desc - Description (for example, cup, diced, and 1-inch pieces).
+      grams:             :num, # Gm_Wgt 
+      data_points:       :int, # Num_Data_Pts 
+      std_dev:           :num, # Std_Dev
+    },
   }
   
   attr_reader :data_dir
