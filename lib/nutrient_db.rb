@@ -130,7 +130,7 @@ class NutrientDb
   private
   
   def normalize_file_name(file_name)
-    File.basename(file_name.downcase)
+    File.basename(file_name.to_s.downcase)
   end
   
   def data_path(file_name)
